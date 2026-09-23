@@ -1,0 +1,13 @@
+{
+  "name": "avatar-did-specification",
+  "private": true,
+  "type": "module",
+  "description": "did:avtr method specification — source of truth (index.md) + publish pipeline",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "python3 -m http.server 8788 -d site"
+  },
+  "devDependencies": {
+    "marked": "^4.3.0"
+  }
+}

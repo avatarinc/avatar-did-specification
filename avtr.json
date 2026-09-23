@@ -1,0 +1,9 @@
+{
+  "name": "avtr",
+  "status": "registered",
+  "verifiableDataRegistry": "Resolution Registry",
+  "specification": "https://docs.avatar.me/specs/did-method-avtr/v1.0/",
+  "contactName": "Avatar Identity",
+  "contactEmail": "did@avatar.me",
+  "contactWebsite": "https://avatar.me"
+}
