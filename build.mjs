@@ -149,6 +149,10 @@ async function main() {
   );
 
   // 5. Assets
+  // 4. Discovery document (spec §3.2): registries.json at the method root, served as published.
+  if (existsSync(path.join(ROOT, "registries.json"))) {
+    await cp(path.join(ROOT, "registries.json"), path.join(SITE, SPEC_PATH, "registries.json"));
+  }
   await mkdir(path.join(SITE, "assets"), { recursive: true });
   await cp(path.join(ROOT, "assets", "spec.css"), path.join(SITE, "assets", "spec.css"));
 

@@ -9,7 +9,9 @@ The **`did:avtr` DID method specification** (Avatar Inc) and the pipeline that p
 |---|---|
 | Landing | https://docs.avatar.me/ |
 | Spec — latest | https://docs.avatar.me/specs/did-method-avtr/latest/ |
-| Spec — v1.0 | https://docs.avatar.me/specs/did-method-avtr/v1.0/ |
+| Spec — v1.1 | https://docs.avatar.me/specs/did-method-avtr/v1.1/ |
+| Spec — v1.0 (frozen) | https://docs.avatar.me/specs/did-method-avtr/v1.0/ |
+| Discovery document (spec §3.2) | https://docs.avatar.me/specs/did-method-avtr/registries.json |
 
 ## Repository layout
 
@@ -17,6 +19,7 @@ The **`did:avtr` DID method specification** (Avatar Inc) and the pipeline that p
 |---|---|
 | `index.md` | The specification as published; the build derives the version from its `**Version:**` header |
 | `avtr.json` | W3C DID method registry entry |
+| `registries.json` | Discovery document (spec §3.2): per-network Registry, deduplication-service and key-set origins |
 | `versions/` | Frozen snapshots of past spec versions (created on version bump; rendered alongside current) |
 | `build.mjs`, `assets/spec.css` | Static site build (Node + marked, no framework) |
 | `.github/workflows/publish.yml` | Build + deploy to GitHub Pages on every push to `main` |
