@@ -70,7 +70,7 @@ ${body}
 `;
 }
 
-async function renderSpec(md, { version, isLatest }) {
+async function renderSpec(md, { version, isLatest, isCurrent = false }) {
   const html = marked.parse(md);
   const toc = buildToc(html);
   // The spec's first <hr> separates the header block from the Abstract — TOC goes there.
@@ -78,8 +78,15 @@ async function renderSpec(md, { version, isLatest }) {
   const rel = isLatest ? "latest" : `v${version}`;
   const dir = path.join(SITE, SPEC_PATH, rel);
   await mkdir(dir, { recursive: true });
+  // /latest/ needs no note. A superseded /vX.Y/ says so and points forward. The
+  // CURRENT version's /vX.Y/ is neither: it is the permanent, citable URL for the
+  // version in force, and the registry entry points at it — telling that reader
+  // the page is "frozen" and the current version is elsewhere sends them to the
+  // one URL that can change under them, which is what pinning exists to avoid.
   const banner = isLatest
     ? ""
+    : isCurrent
+    ? `<p class="version-note">This is the permanent URL for <strong>v${version}</strong>, the current version. Its content will not change; any later revision is published at its own URL.</p>`
     : `<p class="version-note">This is the frozen <strong>v${version}</strong> publication. The current version is at <a href="../latest/">latest</a>.</p>`;
   const footer = `<footer>
 <p>Avatar Inc · <a href="did-method-avtr-v${version}.md">Source (Markdown)</a> ·
@@ -101,8 +108,8 @@ async function main() {
   // 1. Current spec → /v<X.Y>/ and /latest/
   const current = await readFile(path.join(ROOT, "index.md"), "utf8");
   const version = parseVersion(current, "index.md");
-  await renderSpec(current, { version, isLatest: false });
-  await renderSpec(current, { version, isLatest: true });
+  await renderSpec(current, { version, isLatest: false, isCurrent: true });
+  await renderSpec(current, { version, isLatest: true, isCurrent: true });
 
   // 2. Frozen past versions (versions/vX.Y.md), if any
   const versionsDir = path.join(ROOT, "versions");
